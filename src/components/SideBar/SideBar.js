@@ -1,7 +1,12 @@
 import React from "react";
+import classes from "./SideBar.module.css";
 
 const SideBar = () => {
-  return <div>SideBar</div>;
+  return (
+    <>
+      <div className={classes.main}>Sidebar</div>
+    </>
+  );
 };
 
 export default SideBar;

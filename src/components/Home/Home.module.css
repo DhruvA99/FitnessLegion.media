@@ -1,0 +1,7 @@
+.latest_section_content {
+  display: flex;
+  width: 100%;
+  padding: 0.3rem;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

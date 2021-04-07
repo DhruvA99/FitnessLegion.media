@@ -1,15 +1,25 @@
 .App {
   /* text-align: center; */
+  position: relative;
+}
+.navigation_div {
+  /* position: fixed;
+  width: 100%; */
 }
 
 .main_page {
   display: flex;
   flex-direction: row;
 }
+
 .sidebar {
   flex-basis: 20%;
+  /* position: fixed;
+  height: 100%;
+  width: 20%; */
 }
 
 .main_content {
   flex-basis: 80%;
+  /* margin-left: 20%; */
 }

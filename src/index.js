@@ -5,13 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
+import { VideoListProvider } from "./Context/LatestVideoContext/LatestVideo-context";
+import "font-awesome/css/font-awesome.min.css";
 
 makeServer({ environment: "development" });
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <VideoListProvider>
+        <App />
+      </VideoListProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
