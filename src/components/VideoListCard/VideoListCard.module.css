@@ -1,5 +1,11 @@
 .cardCustom {
-  width: 30%;
-  min-width: ;
+  width: 100%;
+
   padding: 0.6rem;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  width: 33.33%;
 }

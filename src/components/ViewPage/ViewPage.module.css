@@ -1,0 +1,74 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.video_player_div {
+  width: 98%;
+  margin: auto;
+  padding-left: 2rem;
+}
+
+.player {
+  border-radius: 1rem 1rem 0 0;
+  width: 90%;
+  margin: auto;
+}
+.videoInformation {
+  padding-left: 2rem;
+  padding-top: 1.7rem;
+}
+.heading {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: 700;
+}
+.video_content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  padding-top: 1rem;
+}
+.author_information {
+  display: flex;
+  flex-direction: row;
+}
+.author_name_div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+.author_name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.subscribers {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.action_buttons_div {
+  padding: 0.5rem;
+}
+.tooltip_text {
+  padding: 0.3rem 0.4rem;
+  font-size: 0.9rem;
+  left: -50%;
+  width: 200%;
+  min-width: auto;
+}
+.info_banner {
+  display: flex;
+  height: 3rem;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 2rem;
+  width: 88%;
+  border-radius: 0 0 10px 10px;
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
+.info_banner_item {
+  padding-left: 1rem;
+}

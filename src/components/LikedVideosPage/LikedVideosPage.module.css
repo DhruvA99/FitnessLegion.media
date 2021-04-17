@@ -1,0 +1,42 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+.main_heading_div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.8rem;
+  padding-left: 1rem;
+}
+
+.main_heading {
+  font-size: 1.7rem;
+  font-weight: 450;
+}
+
+.empty_list_div {
+  padding-left: 1rem;
+  padding-top: 3rem;
+  text-align: center;
+}
+.empty_list {
+  font-size: 1.2rem;
+}
+.horizontalLine_90 {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+  width: 90%;
+}
+.content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.card_div {
+  width: 60%;
+}
