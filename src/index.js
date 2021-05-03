@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { VideoListProvider } from "./Context/LatestVideoContext/LatestVideo-context";
 import "font-awesome/css/font-awesome.min.css";
 import { LikedVideoProvider } from "./Context/LikedVideosContext/LikedVideo-context";
+import { PlaylistProvider } from "./Context/PlaylistContext/Playlist-context";
 
 makeServer({ environment: "development" });
 
@@ -16,7 +17,9 @@ ReactDOM.render(
     <BrowserRouter>
       <VideoListProvider>
         <LikedVideoProvider>
-          <App />
+          <PlaylistProvider>
+            <App />
+          </PlaylistProvider>
         </LikedVideoProvider>
       </VideoListProvider>
     </BrowserRouter>

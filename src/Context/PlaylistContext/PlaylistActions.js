@@ -14,8 +14,24 @@ export const playlistsInitialize = async (dispatch) => {
   }
 };
 
-export const createPlaylist = async (dispatch, data) => {
+export const createPlaylistandAdd = async (dispatch, lists, data) => {
   try {
     dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
+    let updatedList = [...lists, data];
+    let response = await axios.post("/api/playlists", data);
+    dispatch({
+      type: actionTypes.ADD_PLAYLIST_SUCCESS,
+      payload: updatedList,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.ADD_PLAYLIST_FAILED,
+      payload: error.message,
+    });
+  }
+};
+
+export const deletePlaylist = async (dispatch, lists, data) => {
+  try {
   } catch (error) {}
 };

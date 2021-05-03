@@ -52,7 +52,7 @@ export function makeServer({ environment = "test" } = {}) {
       });
       this.post("/playlists", (schema, request) => {
         let attrs = JSON.parse(request.requestBody);
-        return schema.likedVideos.create(attrs);
+        return schema.playlists.create(attrs);
       });
     },
     seeds(server) {

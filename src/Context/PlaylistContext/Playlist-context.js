@@ -14,7 +14,11 @@ export const PlaylistProvider = ({ children }) => {
     PlaylistReducer,
     initialState
   );
-  return <PlaylistContext.Provider>{children}</PlaylistContext.Provider>;
+  return (
+    <PlaylistContext.Provider value={{ playlistState, playlistDispatch }}>
+      {children}
+    </PlaylistContext.Provider>
+  );
 };
 
 export const usePlaylist = () => useContext(PlaylistContext);

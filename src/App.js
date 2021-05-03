@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation/Navigation";
 import SideBar from "./components/SideBar/SideBar";
 import ViewPage from "./components/ViewPage/ViewPage";
 import LikedVideosPage from "./components/LikedVideosPage/LikedVideosPage";
+import ViewPlaylists from "./components/ViewPlaylists/ViewPlaylists";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/watch/:videoId" element={<ViewPage />} />
             <Route path="/likedVideos" element={<LikedVideosPage />} />
+            <Route path="/playlists" element={<ViewPlaylists />} />
           </Routes>
         </div>
       </div>

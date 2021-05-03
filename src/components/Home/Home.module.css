@@ -5,3 +5,6 @@
   flex-wrap: wrap;
   flex-direction: row;
 }
+.videoCard_div {
+  width: 33.3%;
+}

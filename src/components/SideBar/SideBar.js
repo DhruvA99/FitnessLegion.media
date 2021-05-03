@@ -8,6 +8,7 @@ const SideBar = () => {
       <div className={classes.main}>
         <Link to="/">Home</Link>
         <Link to="/likedVideos">Liked Videos</Link>
+        <Link to="/playlists">Playlists</Link>
       </div>
     </>
   );

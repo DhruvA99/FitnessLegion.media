@@ -20,10 +20,6 @@ const LikedVideosPage = () => {
     page = (
       <>
         <div className={classes.main}>
-          <div className={classes.main_heading_div}>
-            <span className={classes.main_heading}>Liked Videos</span>
-            <div className={classes.horizontalLine_90}></div>
-          </div>
           <hr />
           <div className={classes.content}>
             {likedVideoList.length === 0 ? (
@@ -45,7 +41,15 @@ const LikedVideosPage = () => {
     );
   }
 
-  return <>{page}</>;
+  return (
+    <>
+      <div className={classes.main_heading_div}>
+        <span className={classes.main_heading}>Liked Videos</span>
+        <div className={classes.horizontalLine_90}></div>
+      </div>
+      {page}
+    </>
+  );
 };
 
 export default LikedVideosPage;

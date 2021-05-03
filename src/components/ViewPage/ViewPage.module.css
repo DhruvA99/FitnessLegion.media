@@ -51,6 +51,9 @@
 .action_buttons_div {
   padding: 0.5rem;
 }
+.playlist_button {
+  margin-right: 1rem;
+}
 .tooltip_text {
   padding: 0.3rem 0.4rem;
   font-size: 0.9rem;

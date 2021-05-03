@@ -1,0 +1,21 @@
+.main_heading_div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.8rem;
+  padding-left: 1rem;
+}
+
+.main_heading {
+  font-size: 1.7rem;
+  font-weight: 450;
+}
+
+.horizontalLine_90 {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+  width: 90%;
+}

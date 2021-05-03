@@ -10,11 +10,13 @@ import {
   removeLikedVideo,
 } from "../../Context/LikedVideosContext/LikedVideosActions";
 import { useLikedVideo } from "../../Context/LikedVideosContext/LikedVideo-context";
+import PlaylistModal from "../PlaylistModal/PlaylistModal";
 
 const ViewPage = () => {
   const [data, setData] = useState(null);
   const [relatedVideoData, setRelatedVideoData] = useState(null);
   const [videoLiked, setVideoLiked] = useState(false);
+  const [playlistModal, setPlaylistModal] = useState(false);
   const { videoId } = useParams();
   const {
     latestVideoListState: { status: latestVideoStatus, latestVideoList },
@@ -111,6 +113,17 @@ const ViewPage = () => {
                 </div>
 
                 <div className={classes.action_buttons_div}>
+                  <i
+                    className={`fa fa-list fa-2x toolTip ${classes.playlist_button}`}
+                    onClick={() => {
+                      setPlaylistModal((playlistModal) => !playlistModal);
+                    }}
+                    aria-hidden="true"
+                  >
+                    <span className={`toolTipText_top ${classes.tooltip_text}`}>
+                      Add to Playlist
+                    </span>
+                  </i>
                   {!videoLiked ? (
                     <i
                       className="fa fa-thumbs-o-up fa-2x toolTip"
@@ -150,7 +163,13 @@ const ViewPage = () => {
               </div>
             </div>
           </div>
-
+          <PlaylistModal
+            isModalOpen={playlistModal}
+            data={data}
+            modelCloseHandler={() => {
+              setPlaylistModal((playlistModal) => !playlistModal);
+            }}
+          />
           <div className={classes.section_reccomendation}></div>
           <div className={classes.section_comments}></div>
         </div>
