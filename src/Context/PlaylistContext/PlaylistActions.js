@@ -31,7 +31,21 @@ export const createPlaylistandAdd = async (dispatch, lists, data) => {
   }
 };
 
-export const deletePlaylist = async (dispatch, lists, data) => {
+export const deletePlaylist = async (dispatch, lists, id) => {
   try {
-  } catch (error) {}
+    console.log(id, " /// ", lists);
+    dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
+    let updatedList = lists.filter((item) => item.id !== id);
+    console.log(updatedList);
+    let response = await axios.delete(`/api/playlists/${id}`);
+    dispatch({
+      type: actionTypes.DELETE_PLAYLIST_SUCCESS,
+      payload: updatedList,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.DELETE_PLAYLIST_FAILED,
+      payload: error.message,
+    });
+  }
 };

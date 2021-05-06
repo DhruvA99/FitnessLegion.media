@@ -54,6 +54,10 @@ export function makeServer({ environment = "test" } = {}) {
         let attrs = JSON.parse(request.requestBody);
         return schema.playlists.create(attrs);
       });
+      this.delete("/playlists/:id", (schema, request) => {
+        let id = request.params.id;
+        return schema.playlists.find(id).destroy();
+      });
     },
     seeds(server) {
       server.createList("video", 9, {

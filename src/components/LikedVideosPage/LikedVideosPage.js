@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLikedVideo } from "../../Context/LikedVideosContext/LikedVideo-context";
 import { likedVideoInitialize } from "../../Context/LikedVideosContext/LikedVideosActions";
 import classes from "./LikedVideosPage.module.css";
-import VideoListCard from "../VideoListCard/VideoListCard";
+import VideoListCard from "../Cards/VideoListCard/VideoListCard";
 
 const LikedVideosPage = () => {
   const {

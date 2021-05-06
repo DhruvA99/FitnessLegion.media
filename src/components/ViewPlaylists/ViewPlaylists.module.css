@@ -19,3 +19,22 @@
   padding: 0;
   width: 90%;
 }
+.playlist_main {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+.videoCard_div {
+  display: flex;
+  flex-direction: row;
+}
+.playlist_name {
+  font-size: 1.3rem;
+}
+.playlist_action_button_div {
+  padding-top: 1rem;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}

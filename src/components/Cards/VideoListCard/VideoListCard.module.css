@@ -1,7 +1,9 @@
 .cardCustom {
   width: 100%;
 
-  padding: 0.6rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left: 0.4rem;
 }
 
 .link {

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useVedioList } from "../../Context/LatestVideoContext/LatestVideo-context";
 import { latestVideoInitialize } from "../../Context/LatestVideoContext/LatestVideoActions";
-import VideoListCard from "../VideoListCard/VideoListCard";
+import VideoListCard from "../Cards/VideoListCard/VideoListCard";
 import classes from "./Home.module.css";
 
 const Home = () => {

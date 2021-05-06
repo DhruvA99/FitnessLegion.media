@@ -14,8 +14,11 @@ const PlaylistModal = (props) => {
     setName(e.target.value);
   };
   const onNewPlaylistClickHandler = (e) => {
+    const month = new Date().getMonth() + 1;
     const data = {
       playlistName: name,
+      createdOn:
+        new Date().getDate() + "/" + month + "/" + new Date().getFullYear(),
       videoList: [props.data],
     };
     createPlaylistandAdd(playlistDispatch, playlists, data);

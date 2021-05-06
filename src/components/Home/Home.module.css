@@ -1,10 +1,10 @@
 .latest_section_content {
   display: flex;
   width: 100%;
-  padding: 0.3rem;
+  justify-content: space-around;
   flex-wrap: wrap;
   flex-direction: row;
 }
 .videoCard_div {
-  width: 33.3%;
+  width: 32%;
 }

@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { usePlaylist } from "../../Context/PlaylistContext/Playlist-context";
-import { playlistsInitialize } from "../../Context/PlaylistContext/PlaylistActions";
+import {
+  deletePlaylist,
+  playlistsInitialize,
+} from "../../Context/PlaylistContext/PlaylistActions";
 import PlaylistVideoCard from "../Cards/PlaylistVideoCard/PlaylistVideoCard";
 
 import classes from "./ViewPlaylists.module.css";
@@ -13,8 +16,9 @@ export default function ViewPlaylists() {
   useEffect(() => {
     playlistsInitialize(playlistDispatch);
   }, []);
+  console.log(status);
   let page = <p>Loading...</p>;
-  if (status === "getPlaylistSuccess") {
+  if (status === "getPlaylistSuccess" || status === "deletePlaylistSuccess") {
     page = (
       <div className={classes.main}>
         {playlists.length === 0 ? (
@@ -24,13 +28,23 @@ export default function ViewPlaylists() {
         ) : null}
         {playlists.map((item) => (
           <div className={classes.playlist_main}>
-            <span>{item.playlistName}</span>
-            {item.videoList.map((videoData) => (
-              <div className={classes.videoCard_div}>
+            <span className={classes.playlist_name}>{item.playlistName}</span>
+            <div className={classes.playlist_action_button_div}>
+              <span>Created On :{item.createdOn}</span>
+              <i
+                className="fa fa-trash"
+                aria-hidden="true"
+                onClick={() =>
+                  deletePlaylist(playlistDispatch, playlists, item.id)
+                }
+              ></i>
+            </div>
+            <div className={classes.horizontalLine_90}></div>
+            <div className={classes.videoCard_div}>
+              {item.videoList.map((videoData) => (
                 <PlaylistVideoCard item={videoData} />
-                <div className={classes.videoCard_cancel}></div>
-              </div>
-            ))}
+              ))}{" "}
+            </div>
           </div>
         ))}
       </div>

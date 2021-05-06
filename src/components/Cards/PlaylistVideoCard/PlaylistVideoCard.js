@@ -7,13 +7,17 @@ const PlaylistVideoCard = ({ item }) => {
   return (
     <div className={classes.main}>
       <div className={classes.video_div}>
-        <div className={classes.video}></div>
+        <div className={classes.video}>
+          <img className={classes.video_image} src={item.thumbnail} />
+        </div>
         <div className={classes.video_content}>
           <span className={classes.heading}>{updatedName}</span>
           <span className={classes.author}>{item.author}</span>
         </div>
       </div>
-      <div className={classes.cancel_div}></div>
+      <div className={classes.cancel_div}>
+        <i className="fa fa-times fa-2x" aria-hidden="true"></i>
+      </div>
     </div>
   );
 };
