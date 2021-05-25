@@ -1,7 +1,14 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext/Auth-context";
+import { logout } from "../../Context/AuthContext/AuthActions";
 import classes from "./Navigation.module.css";
 
 const Navigation = () => {
+  const {
+    authState: { uniqueAuthId },
+    authDispatch,
+  } = useAuth();
   return (
     <>
       <div className={`navigation_main ${classes.custom_nav_main}`}>
@@ -16,8 +23,25 @@ const Navigation = () => {
           </div>
         </div>
         <div className="navigation_content">
-          <span className="navigation_content_item">Login</span>
-          <span className="navigation_content_item">SignUp</span>
+          {uniqueAuthId !== null ? (
+            <>
+              <span
+                className="navigation_content_item"
+                onClick={() => logout(authDispatch)}
+              >
+                Logout
+              </span>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className={classes.customNavigationItem}>
+                <span className="navigation_content_item">Login</span>
+              </NavLink>
+              <NavLink to="/signup" className={classes.customNavigationItem}>
+                <span className="navigation_content_item">SignUp</span>
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </>

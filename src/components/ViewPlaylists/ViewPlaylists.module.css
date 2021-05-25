@@ -9,6 +9,9 @@
   font-size: 1.7rem;
   font-weight: 450;
 }
+.empty_list_div {
+  padding-left: 1rem;
+}
 
 .horizontalLine_90 {
   display: block;

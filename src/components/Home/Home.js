@@ -26,7 +26,7 @@ const Home = () => {
           <div className={classes.latest_section_content}>
             {latestVideoList.map((item) => (
               <div className={classes.videoCard_div}>
-                <VideoListCard key={item.id} item={item} />
+                <VideoListCard key={item._id} item={item} />
               </div>
             ))}
           </div>

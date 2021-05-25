@@ -5,7 +5,7 @@ export const LikedVideoContext = createContext(null);
 
 export const LikedVideoProvider = ({ children }) => {
   const initialState = {
-    status: "loading",
+    status: "started",
     likedVideoList: [],
     error: null,
   };

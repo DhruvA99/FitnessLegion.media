@@ -20,6 +20,18 @@ const PlaylistReducer = (state, action) => {
         status: "getPlaylistFailed",
         error: action.payload,
       };
+    case actionTypes.ADD_PLAYLIST_SUCCESS:
+      return {
+        ...state,
+        status: "addPlaylistSuccess",
+        playlists: action.payload,
+      };
+    case actionTypes.ADD_PLAYLIST_FAILED:
+      return {
+        ...state,
+        status: "addPlaylistFailed",
+        error: action.payload,
+      };
     case actionTypes.DELETE_PLAYLIST_SUCCESS:
       console.log("delete playlist succes");
       return {

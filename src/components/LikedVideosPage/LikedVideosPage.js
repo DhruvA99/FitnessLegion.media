@@ -3,14 +3,18 @@ import { useLikedVideo } from "../../Context/LikedVideosContext/LikedVideo-conte
 import { likedVideoInitialize } from "../../Context/LikedVideosContext/LikedVideosActions";
 import classes from "./LikedVideosPage.module.css";
 import VideoListCard from "../Cards/VideoListCard/VideoListCard";
+import { useAuth } from "../../Context/AuthContext/Auth-context";
 
 const LikedVideosPage = () => {
   const {
     likedVideoState: { status: likedVideoStatus, likedVideoList },
     likedVideoDispatch,
   } = useLikedVideo();
+  const {
+    authState: { userId, uniqueAuthId },
+  } = useAuth();
   useEffect(() => {
-    likedVideoInitialize(likedVideoDispatch);
+    likedVideoInitialize(likedVideoDispatch, uniqueAuthId, userId);
   }, []);
   let page = <></>;
   if (likedVideoStatus === "loading") {

@@ -1,9 +1,10 @@
 import classes from "./ViewPage.module.css";
 import React, { useEffect, useState } from "react";
 import { useVedioList } from "../../Context/LatestVideoContext/LatestVideo-context";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { latestVideoInitialize } from "../../Context/LatestVideoContext/LatestVideoActions";
+
 import {
   likedVideoInitialize,
   likeVideoHandler,
@@ -11,6 +12,7 @@ import {
 } from "../../Context/LikedVideosContext/LikedVideosActions";
 import { useLikedVideo } from "../../Context/LikedVideosContext/LikedVideo-context";
 import PlaylistModal from "../PlaylistModal/PlaylistModal";
+import { useAuth } from "../../Context/AuthContext/Auth-context";
 
 const ViewPage = () => {
   const [data, setData] = useState(null);
@@ -22,6 +24,10 @@ const ViewPage = () => {
     latestVideoListState: { status: latestVideoStatus, latestVideoList },
     latestVideoListDispatch,
   } = useVedioList();
+  let navigate = useNavigate();
+  const {
+    authState: { status: authStatus, uniqueAuthId, userId },
+  } = useAuth();
   const {
     likedVideoState: { status: likedVideoStatus, likedVideoList },
     likedVideoDispatch,
@@ -30,13 +36,13 @@ const ViewPage = () => {
   useEffect(() => {
     let relatedVideoListData = [];
     if (latestVideoStatus === "getLatestVideoSuccess") {
-      let videoData = latestVideoList.find((item) => item.id === videoId);
+      let videoData = latestVideoList.find((item) => item._id === videoId);
       setData(videoData);
 
-      relatedVideoListData = latestVideoList.filter(
-        (item) => item.category === videoData.category
-      );
-      setRelatedVideoData(relatedVideoListData);
+      // relatedVideoListData = latestVideoList.filter(
+      //   (item) => item.category === videoData.category
+      // );
+      // setRelatedVideoData(relatedVideoListData);
     } else {
       latestVideoInitialize(latestVideoListDispatch);
     }
@@ -44,14 +50,14 @@ const ViewPage = () => {
 
   useEffect(() => {
     if (likedVideoStatus === "getLikedVideoSuccess" && data !== null) {
-      likedVideoList.find((item) => item.id === data.id) !== undefined
+      likedVideoList.find((item) => item._id === data._id) !== undefined
         ? setVideoLiked(true)
         : setVideoLiked(false);
     }
-    if (likedVideoStatus === "loading") {
-      likedVideoInitialize(likedVideoDispatch);
+    if (likedVideoStatus === "started" && authStatus === "authSuccess") {
+      likedVideoInitialize(likedVideoDispatch, uniqueAuthId, userId);
     }
-  }, [likedVideoStatus, data]);
+  }, [likedVideoStatus, data, authStatus]);
 
   let page = <p>Loading...</p>;
   if (data) {
@@ -115,9 +121,13 @@ const ViewPage = () => {
                 <div className={classes.action_buttons_div}>
                   <i
                     className={`fa fa-list fa-2x toolTip ${classes.playlist_button}`}
-                    onClick={() => {
-                      setPlaylistModal((playlistModal) => !playlistModal);
-                    }}
+                    onClick={
+                      uniqueAuthId !== null
+                        ? () => {
+                            setPlaylistModal((playlistModal) => !playlistModal);
+                          }
+                        : () => navigate(`/login`)
+                    }
                     aria-hidden="true"
                   >
                     <span className={`toolTipText_top ${classes.tooltip_text}`}>
@@ -128,10 +138,20 @@ const ViewPage = () => {
                     <i
                       className="fa fa-thumbs-o-up fa-2x toolTip"
                       aria-hidden="true"
-                      onClick={() => {
-                        likeVideoHandler(likedVideoDispatch, data);
-                        setVideoLiked((videoLiked) => !videoLiked);
-                      }}
+                      onClick={
+                        uniqueAuthId !== null
+                          ? () => {
+                              likeVideoHandler(
+                                likedVideoDispatch,
+                                data,
+                                likedVideoList,
+                                uniqueAuthId,
+                                userId
+                              );
+                              setVideoLiked((videoLiked) => !videoLiked);
+                            }
+                          : () => navigate("/login")
+                      }
                     >
                       <span
                         className={`toolTipText_top ${classes.tooltip_text}`}
@@ -143,14 +163,20 @@ const ViewPage = () => {
                     <i
                       className="fa fa-thumbs-up fa-2x toolTip"
                       aria-hidden="true"
-                      onClick={() => {
-                        removeLikedVideo(
-                          likedVideoDispatch,
-                          data.id,
-                          likedVideoList
-                        );
-                        setVideoLiked((videoLiked) => !videoLiked);
-                      }}
+                      onClick={
+                        uniqueAuthId !== null
+                          ? () => {
+                              removeLikedVideo(
+                                likedVideoDispatch,
+                                data._id,
+                                likedVideoList,
+                                uniqueAuthId,
+                                userId
+                              );
+                              setVideoLiked((videoLiked) => !videoLiked);
+                            }
+                          : () => navigate("/login")
+                      }
                     >
                       <span
                         className={`toolTipText_top ${classes.tooltip_text}`}

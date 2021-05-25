@@ -6,7 +6,7 @@ const VideoListCard = ({ item }) => {
   const [thumbnailLink, setThumbnailLink] = useState(item.thumbnail);
   return (
     <>
-      <Link to={`/watch/${item.id}`} className={classes.link}>
+      <Link to={`/watch/${item._id}`} className={classes.link}>
         <div className={`card3 ${classes.cardCustom}`}>
           <img
             className="card_image"

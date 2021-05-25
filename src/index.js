@@ -9,19 +9,25 @@ import { VideoListProvider } from "./Context/LatestVideoContext/LatestVideo-cont
 import "font-awesome/css/font-awesome.min.css";
 import { LikedVideoProvider } from "./Context/LikedVideosContext/LikedVideo-context";
 import { PlaylistProvider } from "./Context/PlaylistContext/Playlist-context";
+import { AuthProvider } from "./Context/AuthContext/Auth-context";
+import axios from "axios";
 
-makeServer({ environment: "development" });
+axios.defaults.baseURL = "https://agile-brook-61279.herokuapp.com/api";
+// axios.defaults.baseURL = "http://localhost:3005/api";
+// makeServer({ environment: "development" });
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <VideoListProvider>
-        <LikedVideoProvider>
-          <PlaylistProvider>
-            <App />
-          </PlaylistProvider>
-        </LikedVideoProvider>
-      </VideoListProvider>
+      <AuthProvider>
+        <VideoListProvider>
+          <LikedVideoProvider>
+            <PlaylistProvider>
+              <App />
+            </PlaylistProvider>
+          </LikedVideoProvider>
+        </VideoListProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
