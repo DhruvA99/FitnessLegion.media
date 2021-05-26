@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { usePlaylist } from "../../Context/PlaylistContext/Playlist-context";
 import { createPlaylistandAdd } from "../../Context/PlaylistContext/PlaylistActions";
 import { toast } from "react-toastify";
+import { useAuth } from "../../Context/AuthContext/Auth-context";
 
 const PlaylistModal = (props) => {
   const [name, setName] = useState("");
@@ -10,6 +11,10 @@ const PlaylistModal = (props) => {
     playlistState: { playlists, status },
     playlistDispatch,
   } = usePlaylist();
+  const {
+    authState: { uniqueAuthId, userId },
+    authDispatch,
+  } = useAuth();
 
   const onChangeHandler = (e) => {
     setName(e.target.value);
@@ -20,9 +25,15 @@ const PlaylistModal = (props) => {
       playlistName: name,
       createdOn:
         new Date().getDate() + "/" + month + "/" + new Date().getFullYear(),
-      videoList: [props.data],
+      videos: [props.data],
     };
-    createPlaylistandAdd(playlistDispatch, playlists, data);
+    createPlaylistandAdd(
+      playlistDispatch,
+      playlists,
+      data,
+      uniqueAuthId,
+      userId
+    );
 
     toast.success("New Playlist Created!", {
       position: "bottom-right",
@@ -33,7 +44,6 @@ const PlaylistModal = (props) => {
       draggable: false,
       progress: undefined,
     });
-
     props.modelCloseHandler();
   };
 

@@ -11,9 +11,8 @@ import { LikedVideoProvider } from "./Context/LikedVideosContext/LikedVideo-cont
 import { PlaylistProvider } from "./Context/PlaylistContext/Playlist-context";
 import { AuthProvider } from "./Context/AuthContext/Auth-context";
 import axios from "axios";
-
-axios.defaults.baseURL = "https://agile-brook-61279.herokuapp.com/api";
-// axios.defaults.baseURL = "http://localhost:3005/api";
+// axios.defaults.baseURL = "https://agile-brook-61279.herokuapp.com/api";
+axios.defaults.baseURL = "http://localhost:3005/api";
 // makeServer({ environment: "development" });
 
 ReactDOM.render(

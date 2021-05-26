@@ -1,24 +1,43 @@
 import axios from "axios";
 import * as actionTypes from "../ActionTypes";
 
-export const playlistsInitialize = async (dispatch) => {
+export const playlistsInitialize = async (dispatch, uniqueAuthId, userId) => {
   try {
     dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
-    let response = await axios.get("/playlists");
+    let response = await axios.get("/playlists", {
+      headers: {
+        uniqueAuthId: `${uniqueAuthId}`,
+        userId: `${userId}`,
+      },
+    });
     dispatch({
       type: actionTypes.GET_PLAYLIST_SUCCESS,
       payload: response.data.playlists,
     });
   } catch (error) {
-    dispatch({ type: actionTypes.GET_PLAYLIST_FAILED, payload: error.message });
+    dispatch({
+      type: actionTypes.GET_PLAYLIST_FAILED,
+      payload: error.response.data.message,
+    });
   }
 };
 
-export const createPlaylistandAdd = async (dispatch, lists, data) => {
+export const createPlaylistandAdd = async (
+  dispatch,
+  lists,
+  data,
+  uniqueAuthId,
+  userId
+) => {
   try {
     dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
     let updatedList = [...lists, data];
-    let response = await axios.post("/playlists", data);
+    let response = await axios.post("/playlists", data, {
+      headers: {
+        uniqueAuthId: `${uniqueAuthId}`,
+        userId: `${userId}`,
+      },
+    });
     dispatch({
       type: actionTypes.ADD_PLAYLIST_SUCCESS,
       payload: updatedList,
@@ -26,7 +45,7 @@ export const createPlaylistandAdd = async (dispatch, lists, data) => {
   } catch (error) {
     dispatch({
       type: actionTypes.ADD_PLAYLIST_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };

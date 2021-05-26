@@ -5,7 +5,7 @@ import {
   playlistsInitialize,
 } from "../../Context/PlaylistContext/PlaylistActions";
 import PlaylistVideoCard from "../Cards/PlaylistVideoCard/PlaylistVideoCard";
-
+import { useAuth } from "../../Context/AuthContext/Auth-context";
 import classes from "./ViewPlaylists.module.css";
 
 export default function ViewPlaylists() {
@@ -13,8 +13,12 @@ export default function ViewPlaylists() {
     playlistState: { playlists, status },
     playlistDispatch,
   } = usePlaylist();
+  const {
+    authState: { uniqueAuthId, userId },
+    authDispatch,
+  } = useAuth();
   useEffect(() => {
-    playlistsInitialize(playlistDispatch);
+    playlistsInitialize(playlistDispatch, uniqueAuthId, userId);
   }, []);
   console.log(status);
   let page = <p>Loading...</p>;
@@ -41,7 +45,7 @@ export default function ViewPlaylists() {
             </div>
             <div className={classes.horizontalLine_90}></div>
             <div className={classes.videoCard_div}>
-              {item.videoList.map((videoData) => (
+              {item.videos?.map((videoData) => (
                 <PlaylistVideoCard item={videoData} />
               ))}{" "}
             </div>
