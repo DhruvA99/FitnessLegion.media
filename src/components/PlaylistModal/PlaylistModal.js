@@ -1,20 +1,27 @@
 import classes from "./PlaylistModal.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePlaylist } from "../../Context/PlaylistContext/Playlist-context";
-import { createPlaylistandAdd } from "../../Context/PlaylistContext/PlaylistActions";
+import {
+  addToExistingPlaylist,
+  createPlaylistandAdd,
+  playlistsInitialize,
+} from "../../Context/PlaylistContext/PlaylistActions";
 import { toast } from "react-toastify";
 import { useAuth } from "../../Context/AuthContext/Auth-context";
 
 const PlaylistModal = (props) => {
   const [name, setName] = useState("");
   const {
-    playlistState: { playlists, status },
+    playlistState: { playlists, status: playlistStatus },
     playlistDispatch,
   } = usePlaylist();
   const {
     authState: { uniqueAuthId, userId },
-    authDispatch,
   } = useAuth();
+
+  useEffect(() => {
+    playlistsInitialize(playlistDispatch, uniqueAuthId, userId);
+  }, []);
 
   const onChangeHandler = (e) => {
     setName(e.target.value);
@@ -75,8 +82,47 @@ const PlaylistModal = (props) => {
                 Add to New Playlist
               </button>
             </div>
-            <div className={classes.model_content_oldPlaylistDiv}>
-              <span>Add to a already existing Playlist</span>
+            <div className={classes.model_content_old_playlist_div}>
+              <span className={classes.old_playlist_heading}>
+                Add to a already existing Playlist
+              </span>
+              <div className={classes.old_playlist_list_div}>
+                {playlists?.map((item) => {
+                  return (
+                    <div className={classes.old_playlist_list_item}>
+                      <span className={classes.old_playlist_list_heading}>
+                        {item.playlistName}
+                      </span>
+                      {item.videos.find(
+                        (video) => video._id === props.data._id
+                      ) ? (
+                        <button
+                          className={`btn btn_disabled ${classes.custom_add_button}`}
+                          disabled
+                        >
+                          Added
+                        </button>
+                      ) : (
+                        <button
+                          className={`btn btn_default ${classes.custom_add_button}`}
+                          onClick={() =>
+                            addToExistingPlaylist(
+                              playlistDispatch,
+                              item._id,
+                              props.data._id,
+                              playlists,
+                              uniqueAuthId,
+                              userId
+                            )
+                          }
+                        >
+                          {playlistStatus === "loading" ? "Adding.." : "Add"}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

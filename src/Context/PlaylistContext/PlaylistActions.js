@@ -68,3 +68,42 @@ export const deletePlaylist = async (dispatch, lists, id) => {
     });
   }
 };
+
+export const addToExistingPlaylist = async (
+  dispatch,
+  playlistId,
+  videoId,
+  playlists,
+  uniqueAuthId,
+  userId
+) => {
+  try {
+    dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
+    let updatedList;
+    let response = await axios.post(
+      `/playlists/${playlistId}`,
+      {
+        videoId: videoId,
+      },
+      {
+        headers: {
+          uniqueAuthId: `${uniqueAuthId}`,
+          userId: `${userId}`,
+        },
+      }
+    );
+    updatedList = playlists.filter((item) => item._id !== playlistId);
+    console.log(playlistId);
+    console.log(updatedList);
+    updatedList = [...updatedList, response.data.playlist];
+    dispatch({
+      type: actionTypes.ADD_PLAYLIST_SUCCESS,
+      payload: updatedList,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.ADD_PLAYLIST_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
