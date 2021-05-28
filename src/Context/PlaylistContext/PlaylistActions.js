@@ -50,13 +50,22 @@ export const createPlaylistandAdd = async (
   }
 };
 
-export const deletePlaylist = async (dispatch, lists, id) => {
+export const deletePlaylist = async (
+  dispatch,
+  lists,
+  playlistId,
+  uniqueAuthId,
+  userId
+) => {
   try {
-    console.log(id, " /// ", lists);
     dispatch({ type: actionTypes.PLAYLIST_INITIALIZE });
-    let updatedList = lists.filter((item) => item.id !== id);
-    console.log(updatedList);
-    let response = await axios.delete(`/playlists/${id}`);
+    let updatedList = lists.filter((item) => item._id !== playlistId);
+    let response = await axios.delete(`/playlists/${playlistId}`, {
+      headers: {
+        uniqueAuthId: `${uniqueAuthId}`,
+        userId: `${userId}`,
+      },
+    });
     dispatch({
       type: actionTypes.DELETE_PLAYLIST_SUCCESS,
       payload: updatedList,

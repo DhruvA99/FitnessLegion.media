@@ -39,7 +39,13 @@ export default function ViewPlaylists() {
                 className="fa fa-trash"
                 aria-hidden="true"
                 onClick={() =>
-                  deletePlaylist(playlistDispatch, playlists, item.id)
+                  deletePlaylist(
+                    playlistDispatch,
+                    playlists,
+                    item._id,
+                    uniqueAuthId,
+                    userId
+                  )
                 }
               ></i>
             </div>
