@@ -84,7 +84,7 @@ const PlaylistModal = (props) => {
             </div>
             <div className={classes.model_content_old_playlist_div}>
               <span className={classes.old_playlist_heading}>
-                Add to a already existing Playlist
+                Add to an already Existing Playlist
               </span>
               <div className={classes.old_playlist_list_div}>
                 {playlists?.map((item) => {

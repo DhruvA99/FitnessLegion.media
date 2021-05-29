@@ -73,7 +73,7 @@ export const deletePlaylist = async (
   } catch (error) {
     dispatch({
       type: actionTypes.DELETE_PLAYLIST_FAILED,
-      payload: error.message,
+      payload: error.response.data.message,
     });
   }
 };
@@ -102,8 +102,7 @@ export const addToExistingPlaylist = async (
       }
     );
     updatedList = playlists.filter((item) => item._id !== playlistId);
-    console.log(playlistId);
-    console.log(updatedList);
+
     updatedList = [...updatedList, response.data.playlist];
     dispatch({
       type: actionTypes.ADD_PLAYLIST_SUCCESS,
@@ -112,6 +111,47 @@ export const addToExistingPlaylist = async (
   } catch (error) {
     dispatch({
       type: actionTypes.ADD_PLAYLIST_FAILED,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteVideoFromPlaylist = async (
+  dispatch,
+  playlistId,
+  videoId,
+  playlists,
+  uniqueAuthId,
+  userId
+) => {
+  try {
+    console.log("deletevideofromplaylist called");
+    dispatch({
+      type: actionTypes.PLAYLIST_INITIALIZE,
+    });
+    const response = await axios.delete(`/playlists/${playlistId}/${videoId}`, {
+      headers: {
+        uniqueAuthId: `${uniqueAuthId}`,
+        userId: `${userId}`,
+      },
+    });
+    console.log(response.data);
+    let updatedPlaylists = playlists.map((item) => {
+      if (item._id === playlistId) {
+        return {
+          ...item,
+          videos: response.data.playlist.videos,
+        };
+      }
+      return item;
+    });
+    dispatch({
+      type: actionTypes.DELETE_PLAYLIST_SUCCESS,
+      payload: updatedPlaylists,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.DELETE_PLAYLIST_FAILED,
       payload: error.response.data.message,
     });
   }

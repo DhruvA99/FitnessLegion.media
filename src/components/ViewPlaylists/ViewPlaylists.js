@@ -31,12 +31,13 @@ export default function ViewPlaylists() {
           </div>
         ) : null}
         {playlists.map((item) => (
-          <div className={classes.playlist_main}>
+          <div key={item._id} className={classes.playlist_main}>
             <span className={classes.playlist_name}>{item.playlistName}</span>
             <div className={classes.playlist_action_button_div}>
               <span>Created On :{item.createdOn}</span>
               <i
                 className="fa fa-trash"
+                style={{ cursor: "pointer" }}
                 aria-hidden="true"
                 onClick={() =>
                   deletePlaylist(
@@ -52,7 +53,11 @@ export default function ViewPlaylists() {
             <div className={classes.horizontalLine_90}></div>
             <div className={classes.videoCard_div}>
               {item.videos?.map((videoData) => (
-                <PlaylistVideoCard item={videoData} />
+                <PlaylistVideoCard
+                  item={videoData}
+                  playlists={playlists}
+                  playlistId={item._id}
+                />
               ))}{" "}
             </div>
           </div>
