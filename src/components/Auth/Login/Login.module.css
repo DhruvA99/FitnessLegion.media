@@ -59,8 +59,14 @@
 .buttonDiv {
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin-top: 17px;
+}
+.buttonDiv > span {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
 }
 
 .button {

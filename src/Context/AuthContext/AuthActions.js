@@ -53,13 +53,15 @@ export const loginUser = async (dispatch, email, password) => {
       type: actionTypes.AUTH_INITIALIZE,
     });
     const response = await axios.post("/login", data);
-    localStorage.setItem("uniqueAuthId", response.data.uniqueAuthId);
-    localStorage.setItem("userId", response.data.userId);
-    dispatch({
-      type: actionTypes.AUTH_SUCCESS,
-      userId: response.data.userId,
-      uniqueAuthId: response.data.uniqueAuthId,
-    });
+    if (response.data.success) {
+      localStorage.setItem("uniqueAuthId", response.data.uniqueAuthId);
+      localStorage.setItem("userId", response.data.userId);
+      dispatch({
+        type: actionTypes.AUTH_SUCCESS,
+        userId: response.data.userId,
+        uniqueAuthId: response.data.uniqueAuthId,
+      });
+    }
   } catch (error) {
     dispatch({
       type: actionTypes.AUTH_FAILED,

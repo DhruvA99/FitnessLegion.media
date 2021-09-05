@@ -14,6 +14,7 @@ const AuthReducer = (state, action) => {
         status: "authSuccess",
         userId: action.userId,
         uniqueAuthId: action.uniqueAuthId,
+        error: null,
       };
     case actionTypes.AUTH_FAILED:
       return {
@@ -27,6 +28,7 @@ const AuthReducer = (state, action) => {
         status: "authLogout",
         userId: null,
         uniqueAuthId: null,
+        error: null,
       };
     default:
       return state;

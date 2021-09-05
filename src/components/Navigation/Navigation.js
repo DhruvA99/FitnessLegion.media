@@ -19,7 +19,7 @@ const Navigation = () => {
             <div className="navigation_Hamburger_Icon_item"></div>
           </div>
           <div className="navigation_logo">
-            <h3>Logo</h3>
+            <h3>FitnessLegion</h3>
           </div>
         </div>
         <div className="navigation_content">

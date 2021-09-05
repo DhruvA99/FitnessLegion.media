@@ -61,6 +61,7 @@ const Login = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    setError({ email: null, password: null });
     loginUser(authDispatch, email, password);
   };
 
@@ -112,6 +113,17 @@ const Login = () => {
                 className={classes.button}
               >
                 {authState.status === "loading" ? "Loggin In...." : "LOGIN"}
+              </button>
+              <span>OR</span>
+              <button
+                onClick={() =>
+                  loginUser(authDispatch, "admin@da.com", "asdfghjkl")
+                }
+                className={classes.button}
+              >
+                {authState.status === "loading"
+                  ? "Loggin In...."
+                  : "LOGIN AS GUEST"}
               </button>
               <span style={{ margin: "auto", padding: "10px", color: "red" }}>
                 <strong>{authState.error}</strong>
