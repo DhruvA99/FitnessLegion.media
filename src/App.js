@@ -13,12 +13,13 @@ import Login from "./components/Auth/Login/Login";
 import AuthRoute from "./assets/images/protectedRoute/AuthRoute";
 import ProtectedRoute from "./assets/images/protectedRoute/ProtectedRoute";
 import { useAuth } from "./Context/AuthContext/Auth-context";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { checkAuthState } from "./Context/AuthContext/AuthActions";
 import axios from "axios";
 
 function App() {
   const { authDispatch } = useAuth();
+  const ref = useRef();
   useEffect(() => {
     checkAuthState(authDispatch);
   }, []);
@@ -28,11 +29,13 @@ function App() {
   // axios.defaults.headers.common["uniqueAuthId"] = uniqueAuthId; // for all requests
   // axios.defaults.headers.common["userId"] = userId; // for all requests
   return (
-    <div className="App">
+    <div className="App" ref={ref}>
       <div className="navigation_div">
         <Navigation />
       </div>
       <div className="main_page">
+        {console.log(ref.current)}
+
         <div className="sidebar">
           <SideBar />
         </div>

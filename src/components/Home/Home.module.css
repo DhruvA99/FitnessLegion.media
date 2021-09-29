@@ -11,3 +11,20 @@
 .main {
   background-color: rgb(253, 253, 253);
 }
+@media screen and (max-width: 600px) {
+  .latest_section_content {
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+  }
+  .videoCard_div {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .latest_section_content {
+    flex-direction: row;
+  }
+  .videoCard_div {
+    width: 40%;
+  }
+}
